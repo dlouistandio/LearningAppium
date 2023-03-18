@@ -5,44 +5,44 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 
 public class AndroidGestures {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         AppiumDriver driver = CreateDriverSession.AndroidDriver();
         longClickGestures(driver);
     }
 
-    public static void longClickGestures(AppiumDriver driver){
+    public static void longClickGestures(AppiumDriver driver) {
         driver.findElement(AppiumBy.accessibilityId("Views")).click();
         driver.findElement(AppiumBy.accessibilityId("Drag anf Drop")).click();
         WebElement element = driver.findElement(AppiumBy.id("io.appium.android.apis:id/drag_dot_1"));
         driver.executeScript("mobile: longClickGesture", ImmutableMap.of(
 //                "elementId", ((RemoteWebElement)element).getId(),
                 "x", 217,
-                "y",659,
+                "y", 659,
                 "duration", 1200
         ));
     }
 
-    public static void clickGestures(AppiumDriver driver){
+    public static void clickGestures(AppiumDriver driver) {
         WebElement element = driver.findElement(AppiumBy.id("Views"));
 
         driver.executeScript("mobile: clickGesture", ImmutableMap.of(
-                "elementId", ((RemoteWebElement)element).getId()
+                "elementId", ((RemoteWebElement) element).getId()
         ));
     }
 
-    public static void dragAndDropGestures(AppiumDriver driver){
+    public static void dragAndDropGestures(AppiumDriver driver) {
         driver.findElement(AppiumBy.accessibilityId("Views")).click();
         driver.findElement(AppiumBy.accessibilityId("Drag anf Drop")).click();
         WebElement element = driver.findElement(AppiumBy.id("io.appium.android.apis:id/drag_dot_1"));
 
         driver.executeScript("mobile: dragGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
-                "endX",649,
+                "endX", 649,
                 "endY", 662
         ));
     }
 
-    public static void pinchGestures(AppiumDriver driver) throws InterruptedException{
+    public static void pinchGestures(AppiumDriver driver) throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(AppiumBy.xpath(""));
         Thread.sleep(5000);
@@ -50,9 +50,42 @@ public class AndroidGestures {
         driver.executeScript("mobile: pinchOpenGesture", ImmutableMap.of(
                 "left", 200, //x cordinates
                 "top", 470, // y cordinates
-                "width",600, // x to right - left
-                "height",600, // y to bottom - top
+                "width", 600, // x to right - left
+                "height", 600, // y to bottom - top
                 "percent", 0.75
         ));
+    }
+
+    public static void swipeGestures(AppiumDriver driver) {
+        driver.findElement(AppiumBy.accessibilityId("Views")).click();
+        WebElement element = driver.findElement(AppiumBy.xpath("/*[rsod]//"));
+
+        driver.executeScript("mobile: swipeGesture", ImmutableMap.of(
+//                "left", 100,
+//                "top", 100,
+//                "width",100,
+//                "height", 100,
+                "elementId", ((RemoteWebElement) element).getId(),
+                "direction", "left",
+                "percent", 0.75
+        ));
+    }
+
+    public static void scrollGesture(AppiumDriver driver) {
+        driver.findElement(AppiumBy.accessibilityId("Views")).click();
+        WebElement element = driver.findElement(AppiumBy.accessibilityId("Hover"));
+
+        boolean canScrollMore = true;
+        while (canScrollMore) {
+            canScrollMore = (Boolean) driver.executeScript("mobile: scrollGesture", ImmutableMap.of(
+//                "left", 100,
+//                "top", 100,
+//                "width",100,
+//                "height", 100,
+                    "elementId", ((RemoteWebElement) element).getId(),
+                    "direction", "down",
+                    "percent", 0.75
+            ));
+        }
     }
 }
