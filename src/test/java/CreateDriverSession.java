@@ -13,6 +13,8 @@ public class CreateDriverSession {
         caps.setCapability(MobileCapabilityType.DEVICE_NAME,"Samsung A52");
         caps.setCapability(MobileCapabilityType.AUTOMATION_NAME,"UiAutomator2");
         caps.setCapability(MobileCapabilityType.UDID,"RR8R602TX1M");
+        caps.setCapability("unlockType","pin");
+        caps.setCapability("unlockKey","8225");
 //        caps.setCapability("avd","Pixel_6"); Untuk Running pakai emulator
 //        caps.setCapability("avdLaunchTimeout",180000); Untuk Running pakai emulator
 //        caps.setCapability("appPackage","io.appium.android.apis"); ini untuk appPackage biar bisa langsung buka app(adb shell dumpsys window | grep -E mCurrentFocus)
